@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'connection.php';
 
 if(isset($_POST['register'])){
@@ -49,6 +50,10 @@ if(isset($_POST['login'])){
 
            if($data['role'] == 'admin'){
 
+           $_SESSION['admin_id'] = $data['id'];
+           $_SESSION['admin_name'] = $data['name'];
+
+
             echo "<script>
                 alert('welcome to admin Panel');
                 location.assign('admin_panel/public.php?index')
@@ -69,8 +74,34 @@ if(isset($_POST['login'])){
         }
 }
 
+<?php
+include 'connection.php';
 
+// INSERT CATEGORY
+if(isset($_POST['category-btn'])){
 
+    $name = $_POST['name'];
 
+    $image = $_FILES['images']['name'];
+    $tmp_name = $_FILES['images']['tmp_name'];
+
+    $folder = "images/".$image;
+
+    move_uploaded_file($tmp_name, $folder);
+
+    $query = "INSERT INTO add_category (cat_name, cat_images) VALUES ('$name','$folder')";
+    mysqli_query($con, $query);
+}
+
+// DELETE CATEGORY
+if(isset($_POST['delete'])){
+    $id = $_POST['id'];
+
+    $delete = "DELETE FROM add_category WHERE cat_id = '$id'";
+    mysqli_query($con, $delete);
+}
+?>
+
+}
 
 ?>
