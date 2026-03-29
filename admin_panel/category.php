@@ -1,3 +1,4 @@
+<?php include "../connection.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,12 +31,13 @@ body {
 <div class="form-container">
     <h3 class="text-center">Add Category</h3>
 
-    <form method="post" enctype="multipart/form-data">
+    <!-- FIX: correct action path -->
+    <form action="../code.php" method="post" enctype="multipart/form-data">
         <label>Upload Image</label>
-        <input type="file" name="images" class="form-control">
+        <input type="file" name="images" class="form-control" required>
 
         <label class="mt-2">Name</label>
-        <input type="text" name="name" class="form-control" placeholder="Enter name">
+        <input type="text" name="name" class="form-control" placeholder="Enter name" required>
 
         <button type="submit" name="category-btn" class="btn btn-success mt-3 w-100">
             Add Category
@@ -55,25 +57,33 @@ body {
         </tr>
 
         <?php
-        $query = mysqli_query($con , "SELECT * FROM add_category");
+        // FIX: check query error
+        $query = mysqli_query($con , "SELECT * FROM add_category") or die(mysqli_error($con));
 
-        while($row = mysqli_fetch_assoc($query)){
+        if(mysqli_num_rows($query) > 0){
+            while($row = mysqli_fetch_assoc($query)){
         ?>
         <tr>
             <td><?php echo $row['cat_id']; ?></td>
             <td><?php echo $row['cat_name']; ?></td>
             <td>
-                <img src="<?php echo $row['cat_images']; ?>" height="60">
+                <!-- FIX: correct image path -->
+                <img src="../<?php echo $row['cat_images']; ?>" height="60">
             </td>
             <td>
                 <!-- DELETE BUTTON -->
-                <form method="post" style="display:inline;">
+                <form action="../code.php" method="post" style="display:inline;">
                     <input type="hidden" name="id" value="<?php echo $row['cat_id']; ?>">
                     <button class="btn btn-danger btn-sm" name="delete">Delete</button>
                 </form>
             </td>
         </tr>
-        <?php } ?>
+        <?php 
+            }
+        } else {
+            echo "<tr><td colspan='4'>No Data Found</td></tr>";
+        }
+        ?>
     </table>
 </div>
 

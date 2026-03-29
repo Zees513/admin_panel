@@ -73,6 +73,7 @@ if(isset($_POST['login'])){
             </script>";
         }
 }
+?>
 
 <?php
 include 'connection.php';
@@ -85,12 +86,17 @@ if(isset($_POST['category-btn'])){
     $image = $_FILES['images']['name'];
     $tmp_name = $_FILES['images']['tmp_name'];
 
+    if (!file_exists("images")) {
+        mkdir("images", 0777, true);
+    }
     $folder = "images/".$image;
 
     move_uploaded_file($tmp_name, $folder);
 
     $query = "INSERT INTO add_category (cat_name, cat_images) VALUES ('$name','$folder')";
     mysqli_query($con, $query);
+
+    echo "<script>alert('Category added successfully'); location.assign('admin_panel/public.php?category');</script>";
 }
 
 // DELETE CATEGORY
@@ -99,9 +105,11 @@ if(isset($_POST['delete'])){
 
     $delete = "DELETE FROM add_category WHERE cat_id = '$id'";
     mysqli_query($con, $delete);
+
+    echo "<script>alert('Category deleted successfully'); location.assign('admin_panel/public.php?category');</script>";
 }
 ?>
 
-}
+
 
 ?>

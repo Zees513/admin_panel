@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2026 at 04:17 AM
+-- Generation Time: Mar 29, 2026 at 01:06 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,27 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ai_202505b1`
+-- Database: `admin_panel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `add_category`
+--
+
+CREATE TABLE `add_category` (
+  `cat_id` int(11) NOT NULL,
+  `cat_name` varchar(100) DEFAULT NULL,
+  `cat_images` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `add_category`
+--
+
+INSERT INTO `add_category` (`cat_id`, `cat_name`, `cat_images`) VALUES
+(1, 'shoes', 'images/shoes.jpg');
 
 -- --------------------------------------------------------
 
@@ -45,12 +64,18 @@ INSERT INTO `register` (`id`, `Name`, `Email`, `Password`, `Address`, `role`) VA
 (2, 'zain', 'zain@gmail.com', 'zain123', 'lahore', 'user'),
 (3, 'abeer', 'abeer123@gmail.com', 'abee9760', 'lahore', 'user'),
 (4, 'riya', 'riya@gmail.com', 'riya123', 'karachi', 'user'),
-(5, 'faiez', 'faiez@gmail.com', 'faiez123', 'lahore', 'user'),
+(5, 'faiez', 'faiez@gmail.com', 'faiez123', 'lahore', 'admin'),
 (8, 'ali', 'ali@gmail.com', 'ali343', 'karachi', 'user');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `add_category`
+--
+ALTER TABLE `add_category`
+  ADD PRIMARY KEY (`cat_id`);
 
 --
 -- Indexes for table `register`
@@ -61,6 +86,12 @@ ALTER TABLE `register`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `add_category`
+--
+ALTER TABLE `add_category`
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `register`
