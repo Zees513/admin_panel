@@ -74,7 +74,8 @@ body {
                 <!-- DELETE BUTTON -->
                 <form action="../code.php" method="post" style="display:inline;">
                     <input type="hidden" name="id" value="<?php echo $row['cat_id']; ?>">
-                    <button class="btn btn-danger btn-sm" name="delete">Delete</button>
+                    <button class="btn btn-danger btn-sm" name="delete" mt-5>Delete</button>
+                    <button class="btn btn-success btn-sm" name="edit" mt-5>edit</button>
                 </form>
             </td>
         </tr>
