@@ -231,7 +231,7 @@ include "connection.php";
             foreach($work as $data){
                 ?>
                 
-                  <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter="<?php echo $data['cat_id']; ?>">
+                  <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".<?php echo $data['cat_id']; ?>">
 					<?php echo $data["cat_name"] ?>
 					</button>
 
