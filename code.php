@@ -62,7 +62,7 @@ if(isset($_POST['login'])){
            }else{
                 echo "<script>
                 alert('welcome to website');
-                location.assign('user.php')
+                location.assign('index.php')
             </script>";
            }
         }
@@ -110,6 +110,45 @@ if(isset($_POST['delete'])){
 }
 ?>
 
+<?php
+
+include "connection.php";
+
+if (isset($_POST['product-btn'])) {
+
+    $P_name = $_POST['p_name']; 
+    $p_des = $_POST['pro_descript'];
+     $p_price = $_POST['p_price'];
+     $p_quantity = $_POST['p_quantity'];
+     $cat = $_POST['p_category'];
+
+
+
+
+    $image    = $_FILES['pro_images']['name'];
+    $tmp_name = $_FILES['pro_images']['tmp_name'];
+
+    $ext = pathinfo($image, PATHINFO_EXTENSION);
+
+    $path = "./images/" .$image;
+
+    // upload file
+    move_uploaded_file($tmp_name, $path);
+
+    // insert
+    $query = "INSERT INTO add_product (p_name, p_description, p_price , p_quantity , p_image , category_id) 
+              VALUES ('$P_name', '$p_des' , '$p_price' , '$p_quantity' , '$image' , '$cat')";
+
+   $done =  mysqli_query($con, $query);
+
+    if($done){
+        echo "<script>
+        alert('product added');
+        </script>";
+    };
+}
+
 
 
 ?>
+

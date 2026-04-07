@@ -46,14 +46,29 @@ body {
         <label class="mt-2">quantity</label>
         <input type="text" name="p_quantity" class="form-control" placeholder="Enter product quantity" required>
 
-        <label class="mt-2">Name</label>
-        <input type="text" name="name" class="form-control" placeholder="Enter name" required>
+
+<label class="mt-2">Select Category</label>
+        <select name="p_category" id="">
+            <?php
+            $work = mysqli_query($con , "SELECT * FROM ADD_CATEGORY");
+            foreach($work as $cat){
+                ?>
+                <option value="<?php echo $cat['cat_id']; ?>"><?php echo $cat["cat_name"] ?></option>
+
+
+
+                <?php
+            }
+            
+            ?>
+        </select>
+
 
         <label>Upload Image</label>
-        <input type="file" name="images" class="form-control" required>
+        <input type="file" name="pro_images" class="form-control" required>
 
 
-        <button type="submit" name="category-btn" class="btn btn-success mt-3 w-100">
+        <button type="submit" name="product-btn" class="btn btn-success mt-3 w-100">
             Add product
         </button>
     </form>
