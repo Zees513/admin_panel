@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2026 at 01:06 PM
+-- Generation Time: Apr 08, 2026 at 09:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -38,7 +38,35 @@ CREATE TABLE `add_category` (
 --
 
 INSERT INTO `add_category` (`cat_id`, `cat_name`, `cat_images`) VALUES
-(1, 'shoes', 'images/shoes.jpg');
+(1, 'shoes', 'shoes.jpg'),
+(2, 'shirt', 'shirt.jpg'),
+(3, 'glasses', 'glasses.webp'),
+(4, 'new', 'shirt.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `add_product`
+--
+
+CREATE TABLE `add_product` (
+  `p_id` int(11) NOT NULL,
+  `p_name` varchar(30) DEFAULT NULL,
+  `p_description` varchar(50) DEFAULT NULL,
+  `p_price` int(11) DEFAULT NULL,
+  `p_quantity` int(11) DEFAULT NULL,
+  `p_image` varchar(255) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `add_product`
+--
+
+INSERT INTO `add_product` (`p_id`, `p_name`, `p_description`, `p_price`, `p_quantity`, `p_image`, `category_id`) VALUES
+(1, 'glasses', 'nice', 25000, 3, 'glasses.webp', 3),
+(2, 'shoes', 'nice', 25000, 3, 'shoes.jpg', 1),
+(3, 'shirt', 'nice', 25000, 3, 'shirt.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -65,7 +93,8 @@ INSERT INTO `register` (`id`, `Name`, `Email`, `Password`, `Address`, `role`) VA
 (3, 'abeer', 'abeer123@gmail.com', 'abee9760', 'lahore', 'user'),
 (4, 'riya', 'riya@gmail.com', 'riya123', 'karachi', 'user'),
 (5, 'faiez', 'faiez@gmail.com', 'faiez123', 'lahore', 'admin'),
-(8, 'ali', 'ali@gmail.com', 'ali343', 'karachi', 'user');
+(8, 'ali', 'ali@gmail.com', 'ali343', 'karachi', 'user'),
+(9, 'hamza', 'hamza@gmail.com', '12345', 'karachi', 'user');
 
 --
 -- Indexes for dumped tables
@@ -76,6 +105,13 @@ INSERT INTO `register` (`id`, `Name`, `Email`, `Password`, `Address`, `role`) VA
 --
 ALTER TABLE `add_category`
   ADD PRIMARY KEY (`cat_id`);
+
+--
+-- Indexes for table `add_product`
+--
+ALTER TABLE `add_product`
+  ADD PRIMARY KEY (`p_id`),
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indexes for table `register`
@@ -91,13 +127,29 @@ ALTER TABLE `register`
 -- AUTO_INCREMENT for table `add_category`
 --
 ALTER TABLE `add_category`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `add_product`
+--
+ALTER TABLE `add_product`
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `add_product`
+--
+ALTER TABLE `add_product`
+  ADD CONSTRAINT `add_product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `add_category` (`cat_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
